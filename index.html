@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 1 Month · My Madrasan 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0010;
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floaters {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .fh {
+      position: absolute;
+      bottom: -40px;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.6); }
+      10%  { opacity: 0.7; }
+      80%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(-110vh) rotate(20deg) scale(1); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 60px;
+    }
+
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---- Hero ---- */
+    .hero { text-align: center; padding: 60px 20px 30px; }
+
+    .big-heart {
+      width: 90px; height: 90px;
+      margin: 0 auto 24px;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .big-heart svg { width: 100%; height: 100%; }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.12); }
+    }
+
+    .script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 42px;
+      background: linear-gradient(135deg, #ff9ecd, #ffd6e8, #ffb3d1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: #d4a0be;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,150,200,0.12);
+      border: 1px solid rgba(255,150,200,0.3);
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: #ffb3d6;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .nickname-tag {
+      display: inline-block;
+      background: rgba(255,100,170,0.15);
+      border: 1px solid rgba(255,100,170,0.35);
+      border-radius: 30px;
+      padding: 5px 18px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: #ffb3d6;
+      margin-bottom: 14px;
+    }
+
+    /* ---- Milestone ---- */
+    .milestone {
+      background: rgba(255,100,170,0.1);
+      border: 1px solid rgba(255,100,170,0.3);
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      margin: 10px 0 30px;
+    }
+
+    .milestone-num {
+      font-family: 'Dancing Script', cursive;
+      font-size: 64px;
+      color: #ff9ecd;
+      line-height: 1;
+      display: block;
+    }
+
+    .milestone-label {
+      font-size: 13px;
+      color: #d4a0be;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .sparkle-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .sparkle-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #ff9ecd;
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+    .sparkle-dot:nth-child(2) { animation-delay: 0.3s; }
+    .sparkle-dot:nth-child(3) { animation-delay: 0.6s; }
+    .sparkle-dot:nth-child(4) { animation-delay: 0.9s; }
+    .sparkle-dot:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes twinkle {
+      0%,100% { opacity: 0.2; transform: scale(0.8); }
+      50%      { opacity: 1; transform: scale(1.4); box-shadow: 0 0 6px #ff9ecd; }
+    }
+
+    /* ---- Section titles ---- */
+    .section-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #ffb3d6;
+      text-align: center;
+      margin: 40px 0 24px;
+    }
+
+    /* ---- Timeline ---- */
+    .timeline { position: relative; padding-left: 32px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, #ff6eb0, #ff6eb0, transparent);
+    }
+
+    .t-item {
+      position: relative;
+      margin-bottom: 28px;
+      background: rgba(255,100,180,0.07);
+      border: 1px solid rgba(255,100,180,0.2);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .t-item::before {
+      content: '';
+      position: absolute;
+      left: -27px; top: 18px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #ff6eb0;
+      box-shadow: 0 0 8px #ff6eb0;
+    }
+
+    .t-date {
+      font-size: 11px;
+      color: #ff9ecd;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .t-text {
+      font-size: 15px;
+      color: #f0d0e4;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ---- Letter ---- */
+    .letter-card {
+      background: rgba(255,120,180,0.06);
+      border: 1px solid rgba(255,120,180,0.25);
+      border-radius: 20px;
+      padding: 30px 26px;
+      margin: 10px 0 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-card::before {
+      content: '❝';
+      font-size: 80px;
+      color: rgba(255,100,160,0.08);
+      position: absolute;
+      top: -10px; left: 10px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .letter-text {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #f0d8ec;
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+    }
+
+    .letter-text span.highlight { color: #ff9ecd; font-weight: 400; }
+
+    .sign {
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      color: #ff9ecd;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    /* ---- Promise ---- */
+    .petal-row {
+      text-align: center;
+      font-size: 20px;
+      letter-spacing: 4px;
+      margin: 20px 0;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%,100% { opacity: 0.5; }
+      50%      { opacity: 1; }
+    }
+
+    .promise { text-align: center; padding: 30px 20px 10px; }
+
+    .promise-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: #ffc8e0;
+      line-height: 1.6;
+    }
+
+    /* ---- Divider ---- */
+    .divider {
+      text-align: center;
+      color: rgba(255,150,200,0.3);
+      letter-spacing: 8px;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+
+    /* ---- Footer ---- */
+    .footer { text-align: center; padding: 30px 0 10px; }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="floaters" id="floaters"></div>
+
+<div class="wrap">
+  <div class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="big-heart">
+        <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ff6eb0"/>
+              <stop offset="100%" style="stop-color:#ff2d78"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 80 C20 60 5 45 5 28 A22 22 0 0 1 50 18 A22 22 0 0 1 95 28 C95 45 80 60 50 80Z" fill="url(#hg)"/>
+          <path d="M50 80 C20 60 5 45 5 28 A22 22 0 0 1 50 18 A22 22 0 0 1 95 28 C95 45 80 60 50 80Z" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="nickname-tag">My Madrasan 🌸</div><br>
+
+      <div class="date-badge">
+        <span>★</span> 8 April · 1 Month <span>★</span>
+      </div>
+
+      <div class="script">Happy 1 Month</div>
+      <div class="script" style="font-size:28px; margin-top:-8px;">My Love 💕</div>
+      <div class="sub">One month of our beautiful new beginning</div>
+    </div>
+
+    <!-- MILESTONE -->
+    <div class="milestone">
+      <span class="milestone-num">1</span>
+      <div class="milestone-label">month of our new beginning together</div>
+      <div class="sparkle-row">
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- TIMELINE -->
+    <div class="section-title">Our Story</div>
+
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">24 December</div>
+        <div class="t-text">The day everything changed — the day you walked into my life and made it whole. The best gift I never knew I needed. 🎄</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">December — February</div>
+        <div class="t-text">Three months of love, laughter, little arguments and even littler apologies. Every fight made us stronger. Every sorry brought us closer. 💕</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">A new beginning</div>
+        <div class="t-text">Love found its way. Because what we have is too real, too deep, too beautiful to ever let go of. So we held on — and started again, stronger than ever. 🌸</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Today · 8 April</div>
+        <div class="t-text">One month of choosing each other every single day — with more understanding, more patience, and more love than ever before. 🌙</div>
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- LETTER -->
+    <div class="section-title">A Letter For You</div>
+
+    <div class="letter-card">
+      <div class="letter-text">
+        My Madrasan,<br><br>
+        I know life has been throwing so much at you lately, and I wish I could take every bit of that frustration and pain away from you. Just know — <span class="highlight">every storm you face, you don't face alone.</span> I am here, even when I can't be there physically. I am yours in every way that matters.<br><br>
+        What we have is something truly rare. A love that is patient, that understands, that holds on even when things get hard. <span class="highlight">We chose each other, and that is the most beautiful thing in the world to me.</span><br><br>
+        Today marks one month of our new beginning, and I want you to know — <span class="highlight">I love you not just on the easy days, but especially on the hard ones.</span> On the days when the world feels too heavy, I want to be your rest. Your safe place. Your home.<br><br>
+        You are so strong, even when you don't feel like it. And I am so incredibly lucky to call you mine, my Madrasan. 🌸<br><br>
+        Happy 1 month, my love. Here's to forever.
+      </div>
+      <div class="sign">Always yours 💕</div>
+    </div>
+
+    <div class="petal-row">🌸 🌺 🌸 🌺 🌸</div>
+
+    <!-- PROMISE -->
+    <div class="promise">
+      <div class="promise-text">
+        "I promise to love you through every storm,<br>
+        celebrate every calm,<br>
+        and choose you —<br>
+        every single day,<br>
+        my Madrasan."
+      </div>
+    </div>
+
+    <div class="divider" style="margin-top:30px">✦ ✦ ✦</div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="script" style="font-size:32px;">Happy 1 Month</div>
+      <div style="font-size:14px; color:#d4a0be; margin-top:8px; letter-spacing:1px;">8 April · Forever starting here 💕</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ---- Stars ---- */
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const stars = Array.from({length: 160}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.4 + 0.3,
+    a: Math.random(),
+    s: Math.random() * 0.008 + 0.003,
+    d: Math.random() > 0.5 ? 1 : -1
+  }));
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.s * s.d;
+      if (s.a > 1 || s.a < 0.1) s.d *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 200, 230, ${s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  /* ---- Floating hearts ---- */
+  const floatContainer = document.getElementById('floaters');
+  const heartColors = ['#ff6eb0','#ff2d78','#ffadd1','#ff9ecd'];
+
+  function makeHeart() {
+    const el = document.createElement('div');
+    el.className = 'fh';
+    const size = Math.random() * 18 + 10;
+    const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+    el.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 100 90"><path d="M50 80 C20 60 5 45 5 28 A22 22 0 0 1 50 18 A22 22 0 0 1 95 28 C95 45 80 60 50 80Z" fill="${color}" opacity="0.7"/></svg>`;
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (Math.random() * 8 + 7) + 's';
+    el.style.animationDelay = (Math.random() * 5) + 's';
+    floatContainer.appendChild(el);
+    setTimeout(() => el.remove(), 16000);
+  }
+
+  setInterval(makeHeart, 600);
+  for (let i = 0; i < 8; i++) setTimeout(makeHeart, i * 200);
+</script>
+
+</body>
+</html>
